@@ -41,7 +41,7 @@ export const buscarProducto = (nombre) => {
   }
 
   // Mostrar resultados formateados
-  console.log(chalk.bold.bgBlue.white(`\n🔎 RESULTADOS DE BUSQUEDA: "${nombre}"`));
+  console.log(chalk.bold.bgBlue.white(`\n RESULTADOS DE BUSQUEDA: "${nombre}"`));
   console.log(chalk.yellow("ID   Nombre                 Precio    Categoria"));
   console.log(chalk.gray("-----------------------------------------------"));
 
@@ -73,7 +73,7 @@ export const agregarAlCarrito = (id, cantidad) => {
 
 //  Ver carrito
 export const verCarrito = () => {
-  if (carrito.length === 0) return console.log(chalk.yellow("\n🛒 El carrito está vacío.\n"));
+  if (carrito.length === 0) return console.log(chalk.yellow("\n El carrito está vacío.\n"));
   console.log(chalk.cyan.bold("\n=== CARRITO ACTUAL ==="));
   console.log(chalk.yellow("Producto              Cant.  Precio   Subtotal"));
   console.log(chalk.gray("-----------------------------------------------"));
@@ -114,7 +114,7 @@ export const generarTicket = () => {
   if (carrito.length === 0) return console.log(chalk.red(" No hay productos en el carrito."));
 
   const { subtotal, descuento, igv, total } = calcularTotales();
-  console.log(chalk.bgCyan.white.bold("\n===== 🧾 RESUMEN DE COMPRA ====="));
+  console.log(chalk.bgCyan.white.bold("\n=====  RESUMEN DE COMPRA ====="));
   console.log("Producto              Cant.  Precio   Subtotal");
   console.log(chalk.gray("-----------------------------------------------"));
   carrito.forEach(i => {
@@ -125,7 +125,7 @@ export const generarTicket = () => {
   console.log(chalk.yellow(`Descuento:  S/${descuento.toFixed(2)}`));
   console.log(chalk.yellow(`IGV (18%):  S/${igv.toFixed(2)}`));
   console.log(chalk.blueBright.bold(`TOTAL:      S/${total.toFixed(2)}`));
-  console.log(chalk.green.bold("\n🎉 ¡Gracias por su compra en Panadería Delicia! \n"));
+  console.log(chalk.green.bold("\n ¡Gracias por su compra en Panadería Delicia! \n"));
 
   historialVentas.push(...carrito);
   carrito = [];
