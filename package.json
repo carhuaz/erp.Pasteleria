@@ -1,0 +1,23 @@
+{
+  "name": "mini-erp-delicia",
+  "version": "1.0.0",
+  "description": "Sistema de ventas tipo Mini-ERP para la panadería Delicia (consola interactiva).",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "ERP",
+    "ventas",
+    "panadería",
+    "Node.js",
+    "chalk"
+  ],
+  "author": "Tu Nombre",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "readline-sync": "^1.4.10"
+  }
+}
