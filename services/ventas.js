@@ -1,11 +1,10 @@
-// services/ventas.js
 import chalk from "chalk";
 import { productos } from "../data/productos.js";
 
 let carrito = [];
 let historialVentas = [];
 
-// ✅ Listar productos
+//  Listar productos
 export const listarProductos = () => {
   console.log(chalk.bold.bgBlue.white("\n=== CATÁLOGO DE PRODUCTOS ==="));
   console.log(chalk.yellow("ID   Nombre                 Precio    Categoría"));
@@ -18,14 +17,14 @@ export const listarProductos = () => {
   console.log(chalk.gray("-----------------------------------------------\n"));
 };
 
-// ✅ Buscar producto
+//  Buscar producto
 // --------------------------------------------
 // Buscar producto por nombre o coincidencia parcial
 // --------------------------------------------
 export const buscarProducto = (nombre) => {
   // Validar entrada vacia o nula
   if (!nombre || nombre.trim() === "") {
-    console.log(chalk.red("⚠️ Debe ingresar un texto para buscar."));
+    console.log(chalk.red(" Debe ingresar un texto para buscar."));
     return;
   }
 
@@ -37,7 +36,7 @@ export const buscarProducto = (nombre) => {
 
   // Si no hay coincidencias, mostrar mensaje
   if (resultados.length === 0) {
-    console.log(chalk.red(`\n❌ No se encontro ningun producto que coincida con: "${nombre}"`));
+    console.log(chalk.red(`\n No se encontro ningun producto que coincida con: "${nombre}"`));
     return;
   }
 
@@ -59,20 +58,20 @@ export const buscarProducto = (nombre) => {
 };
 
 
-// ✅ Agregar al carrito
+//  Agregar al carrito
 export const agregarAlCarrito = (id, cantidad) => {
   const prod = productos.find(p => p.id === id);
-  if (!prod) return console.log(chalk.red("❌ ID de producto no válido."));
-  if (isNaN(cantidad) || cantidad <= 0) return console.log(chalk.red("❌ Cantidad inválida. Debe ser mayor a 0."));
+  if (!prod) return console.log(chalk.red(" ID de producto no válido."));
+  if (isNaN(cantidad) || cantidad <= 0) return console.log(chalk.red(" Cantidad inválida. Debe ser mayor a 0."));
 
   const item = carrito.find(i => i.id === id);
   if (item) item.cantidad += cantidad;
   else carrito.push({ ...prod, cantidad });
 
-  console.log(chalk.greenBright(`✅ ${prod.nombre} agregado (${cantidad} x S/${prod.precio.toFixed(2)} = S/${(prod.precio * cantidad).toFixed(2)})`));
+  console.log(chalk.greenBright(` ${prod.nombre} agregado (${cantidad} x S/${prod.precio.toFixed(2)} = S/${(prod.precio * cantidad).toFixed(2)})`));
 };
 
-// ✅ Ver carrito
+//  Ver carrito
 export const verCarrito = () => {
   if (carrito.length === 0) return console.log(chalk.yellow("\n🛒 El carrito está vacío.\n"));
   console.log(chalk.cyan.bold("\n=== CARRITO ACTUAL ==="));
@@ -84,21 +83,21 @@ export const verCarrito = () => {
   console.log(chalk.gray("-----------------------------------------------\n"));
 };
 
-// ✅ Eliminar producto
+//  Eliminar producto
 export const eliminarDelCarrito = (nombre) => {
   const idx = carrito.findIndex(i => i.nombre.toLowerCase() === nombre.toLowerCase());
-  if (idx === -1) return console.log(chalk.red("❌ Producto no encontrado en el carrito."));
+  if (idx === -1) return console.log(chalk.red(" Producto no encontrado en el carrito."));
   carrito.splice(idx, 1);
   console.log(chalk.green("🗑️  Producto eliminado correctamente."));
 };
 
-// ✅ Vaciar carrito
+//  Vaciar carrito
 export const vaciarCarrito = () => {
   carrito = [];
   console.log(chalk.yellow("🧹 Carrito vaciado."));
 };
 
-// ✅ Calcular totales
+//  Calcular totales
 export const calcularTotales = () => {
   let subtotal = carrito.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
   let descuento = 0;
@@ -110,9 +109,9 @@ export const calcularTotales = () => {
   return { subtotal, descuento, igv, total };
 };
 
-// ✅ Generar ticket
+//  Generar ticket
 export const generarTicket = () => {
-  if (carrito.length === 0) return console.log(chalk.red("❌ No hay productos en el carrito."));
+  if (carrito.length === 0) return console.log(chalk.red(" No hay productos en el carrito."));
 
   const { subtotal, descuento, igv, total } = calcularTotales();
   console.log(chalk.bgCyan.white.bold("\n===== 🧾 RESUMEN DE COMPRA ====="));
@@ -126,18 +125,18 @@ export const generarTicket = () => {
   console.log(chalk.yellow(`Descuento:  S/${descuento.toFixed(2)}`));
   console.log(chalk.yellow(`IGV (18%):  S/${igv.toFixed(2)}`));
   console.log(chalk.blueBright.bold(`TOTAL:      S/${total.toFixed(2)}`));
-  console.log(chalk.green.bold("\n🎉 ¡Gracias por su compra en Panadería Delicia! 🥐\n"));
+  console.log(chalk.green.bold("\n🎉 ¡Gracias por su compra en Panadería Delicia! \n"));
 
   historialVentas.push(...carrito);
   carrito = [];
 };
 
-// ✅ Reportes
+//  Reportes
 export const reportes = () => {
-  console.log(chalk.magenta.bold("\n=== 📊 REPORTES ==="));
+  console.log(chalk.magenta.bold("\n===  REPORTES ==="));
 
   const top3 = [...productos].sort((a, b) => b.precio - a.precio).slice(0, 3);
-  console.log(chalk.yellow("\n💰 Top 3 productos más caros:"));
+  console.log(chalk.yellow("\n Top 3 productos más caros:"));
   top3.forEach(p => console.log(`${p.nombre} - S/${p.precio.toFixed(2)}`));
 
   const vendidos = {};
@@ -145,7 +144,7 @@ export const reportes = () => {
   const topVendidos = Object.entries(vendidos).sort((a, b) => b[1] - a[1]);
 
   if (topVendidos.length > 0) {
-    console.log(chalk.yellow("\n🏆 Productos más vendidos:"));
+    console.log(chalk.yellow("\n Productos más vendidos:"));
     topVendidos.forEach(([nombre, cant]) => console.log(`${nombre} - ${cant} unidades`));
   } else console.log(chalk.gray("Aún no hay ventas registradas."));
 
