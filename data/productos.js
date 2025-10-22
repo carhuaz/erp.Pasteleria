@@ -1,6 +1,5 @@
-// data/productos.js
 // ==========================================
-// Catalogo actualizado de la panaderia-pasteleria Delicia
+// Catalogo panaderia-pasteleria Delicia
 // ==========================================
 export const productos = [
   { id: 1, nombre: "Croissant", precio: 3.00, categoria: "Panaderia" },
